@@ -1,0 +1,206 @@
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  color: #ffffff;
+  background: #000;
+  overflow-x: hidden;
+}
+
+#bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  display: block;
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(800px 420px at 50% 45%, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 35%, rgba(0,0,0,0.35) 70%, rgba(0,0,0,0.75) 100%);
+  mix-blend-mode: screen;
+  z-index: -1;
+}
+
+/* Top bar */
+.topbar {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(96vw, 1280px);
+  height: 72px;
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 20;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark {
+  width: clamp(56px, 6vw, 76px);
+  height: auto;
+  display: block;
+}
+
+
+.initiative {
+  display: flex;
+  align-items: center;
+  color: #111827;
+  transform: translateX(0);
+}
+.initiative-logo {
+  width: clamp(64px, 7vw, 86px);
+  height: clamp(64px, 7vw, 86px);
+  display: block;
+  object-fit: contain;
+}
+
+
+.content {
+  min-height: 100vh;
+  padding-top: 120px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.logo-wrap {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  max-height:350px ;
+  margin-bottom: 60px;
+  position: absolute;
+}
+
+.logo-sm {
+  display: block;
+  width: clamp(220px, 28vw, 420px);
+  height: auto;
+  margin: 0 auto;
+  margin-left: 0;
+}
+.align{
+  position: relative;
+  margin-top: clamp(80px, 12vh, 140px);
+}
+
+.tagline {
+ padding-top: 0;
+  position: relative;
+  max-width: min(90vw, 620px);
+  margin: 0 auto 28px;
+  color: #ffffff;
+  opacity: 0.9;
+  font-weight:500;
+
+}
+
+.cta {
+  
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 28px;
+  height: clamp(56px, 8vh, 72px);
+  width: clamp(240px, 48vw, 360px);
+  margin-top: 0; /* spacing controlled by .tagline margin-bottom */
+  border-radius: 50px;
+  background: black;
+  border: 0;
+  border-color:transparent;
+  cursor: pointer;
+  --offset:1.4px;
+  overflow: hidden;
+ 
+}
+.cta-text {
+   font-size: clamp(18px, 3.4vw, 28px);
+  color: #ffffff;
+  font-weight: 410;
+  display: block;
+  padding: 10px 10px;
+  position: relative;
+  z-index: 2;
+}
+.cta::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: conic-gradient(transparent 270deg,rgb(163, 195, 248),transparent);
+ transform: translate(-50%, -50%);
+ aspect-ratio: 1;
+ width: 100%;
+ animation: rotate 3s linear infinite;
+}
+.cta::after {
+  content: '';
+  background: inherit;
+  border-radius: inherit;
+  position: absolute;
+  inset:var(--offset);
+  height:calc(100% - 2 * var(--offset));
+  width:calc(100% - 2 * var(--offset));
+}
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+  
+}
+
+
+/* Responsive */
+@media (max-width: 900px) {
+  .topbar { width: calc(100% - 24px); height: 72px; padding: 0 16px; }
+  .cta { width: min(80vw, 420px); }
+}
+
+@media (max-width: 520px) {
+  .content { padding-top: 110px; }
+  .cta { width: calc(100% - 48px); }
+}
+
+@media (min-width: 1281px) {
+  .content { padding-top: 140px; }
+}
+
+/* Desktop restoration to previous alignment on large laptop screens */
+@media (min-width: 1200px) {
+  .topbar { top: 23px; width: 1370px; height: 72px; padding: 0 26px; }
+  .brand-mark { width: 76px; }
+  .initiative { transform: translateX(18px); }
+  .initiative-logo { width: 86px; height: 86px; }
+  .logo-sm { width: 340px; margin-left: 52px; }
+  .align { margin-top: 130px; }
+  .cta { padding: 30px 34px; height: 70px; width: 310px; }
+  .cta-text { font-size: 28px; }
+} 
